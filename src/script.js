@@ -6,13 +6,23 @@ const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const pollRouter = express.Router();
+
 app.use(morgan('tiny'));
 app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
+app.set('views', path.join('./src/views'));
+app.set('view engine', 'ejs');
 
+pollRouter.route('/submit').get((req, res) => {
+  res.send('Thanks for submiting the poll.');
+});
+
+app.use('/', pollRouter);
 app.get('/', (request, response) => {
-  response.sendFile(path.join(__dirname, '../views/index.html'));
+  // response.sendFile(path.join(__dirname, '../views/index.html'));
+  response.render('index', { options: [{ link: '/submit', title: 'submit' }, { link: '/clear', title: 'clear' }] });
 });
 
 app.listen(port, () => {

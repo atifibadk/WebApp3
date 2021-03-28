@@ -1,0 +1,29 @@
+<html>
+
+    <title>webapp3</title>
+
+    <head>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+    </head>
+
+
+
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">This is webapp3</div>
+            <ul>
+                <%for(let i=0;i<options.length;i++){%>
+                <li>
+                    <a href=<%=options[i].link%>><%=options[i].title%></a>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+
+
+    </body>
+<html>
